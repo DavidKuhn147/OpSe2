@@ -8,11 +8,7 @@ import javafx.stage.Stage;
 public class Main extends Application{
 
 	public static void main(String[] args) {
-<<<<<<< HEAD
-		System.out.print("Guten TagAAAA");
-=======
-		System.out.print("Guten Tagal");
->>>>>>> branch 'master' of https://github.com/DavidKuhn147/OpSe2
+		System.out.print("Guten TagAAAAAA");
 		launch(args);
 	}
 
