@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class Main extends Application{
 
 	public static void main(String[] args) {
-		System.out.print("Guten Tagjkljkl");
+		System.out.print("Guten Tagal");
 		launch(args);
 	}
 
