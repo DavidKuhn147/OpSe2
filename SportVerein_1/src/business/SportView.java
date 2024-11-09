@@ -1,3 +1,6 @@
+//Herr Jonker vielleicht nochmal fragen, warum ich die Reihenfolge von den TextFields nicht ändern konnte
+//Hab es irgendwie relativ "normal" hingekriegt, würde es aber dennoch gerne wissen.
+
 package business;
 
 import javafx.event.ActionEvent;
@@ -19,167 +22,222 @@ import ownUtil.MeldungsfensterAnzeiger;
 
 public class SportView {
 	
-	SportControl sportControl;
-	SportModel sportModel;
+	private SportControl sportControl;
+	private SportModel sportModel;
 	
-	 private Pane pane     					= new  Pane();
-	 private Label lblEingabe    	 		= new Label("Eingabe");
-	 private Label lblAnzeige   	 	    	= new Label("Anzeige");
-	 private Label lblName 					= new Label("Name:");
-	 private Label lblGeoeffnetVon   		= new Label("Geöffnet von:");
-	 private Label lblGeoeffnetBis  	 		= new Label("Geöffnet bis:");
-	 private Label lblStrasseHNr   			= new Label("Straße und Hausnummer:");
-	 private Label lblDienstleistungen  		= new Label("Dienstleistungen:");
-	 private TextField name 	 			= new TextField();
-	 private TextField ort		= new TextField();
-	    private TextField anzahlMitglieder	= new TextField();
-	    private TextField anzahlEhemaligerMitglieder = new TextField();
-	    private TextField sportarten			= new TextField();
-	    private TextArea txtAnzeige  			= new TextArea();
-	    private Button btnEingabe 		 		= new Button("Eingabe");
-	    private Button btnAnzeige 		 		= new Button("Anzeige");
-	    private MenuBar mnbrMenuLeiste  		= new MenuBar();
-	    private Menu mnDatei             		= new Menu("Datei");
-	    private MenuItem mnItmCsvImport 		= new MenuItem("csv-Import");
-	   private MenuItem mnItmTxtImport 		= new MenuItem("txt-Import");
-	    private MenuItem mnItmCsvExport 		= new MenuItem("csv-Export");    
+	
+	//Nur zu Info Sportverein Objekt wurde in Model erstellt
+
+	
+    //---Anfang Attribute der grafischen Oberflaeche---
+    private Pane pane     					= new  Pane();
+    private Label lblEingabe    	 		= new Label("Eingabe");
+    private Label lblAnzeige   	 	    	= new Label("Anzeige");
+    
+    private Label lblName 					= new Label("Name: ");
+    private Label lblOrt   					= new Label("Ort:");
+    private Label lblEhemalige  	 		= new Label("Anzahl Ehemalige: ");
+    private Label lblAnzahlMitglieder   	= new Label("Anzahl Mitglieder: ");
+    private Label lblSportarten  			= new Label("Sportarten: ");
+    
+    private TextField name 	 			= new TextField();
+    private TextField ort		= new TextField();
+    private TextField anzahlEhemaligerMitglieder = new TextField();
+    private TextField anzahlMitglieder1			= new TextField();
+    private TextField sportArten1	= new TextField();
+
+    private TextArea txtAnzeige  			= new TextArea();
+    private Button btnEingabe 		 		= new Button("Eingabe");
+    private Button btnAnzeige 		 		= new Button("Anzeige");
+    private MenuBar mnbrMenuLeiste  		= new MenuBar();
+    private Menu mnDatei             		= new Menu("Datei");
+    private MenuItem mnItmCsvImport 		= new MenuItem("csv-Import");
+    private MenuItem mnItmTxtImport 		= new MenuItem("txt-Import");
+    private MenuItem mnItmCsvExport 		= new MenuItem("csv-Export");  
 	
 	
 	public SportView(SportControl sportControl, SportModel sportModel, Stage primaryStage ) {
 		this.sportControl = sportControl;
-		this.sportModel = new SportModel();
+		this.sportModel = sportModel;
+				
 		
-		
-		
-		//hier noch Objekt von sportModel erzeugen
-		
-		
+		//Entweder für das Hauptfenster in eigene Methode auslagern, oder im Construktor reinpacken (glaube beides möglich/richtig/okay)
 		Scene scene = new Scene(this.pane, 700, 340);
     	primaryStage.setScene(scene);
     	primaryStage.setTitle("Verwaltung von SportVereinen");
     	primaryStage.show();
     	
-  
     	this.initKomponenten();
+    	
 		this.initListener();
 		
 		
 	}
 	
-	private void initKomponenten(){
-       	// Labels
-    	lblEingabe.setLayoutX(20);
-    	lblEingabe.setLayoutY(40);
-    	Font font = new Font("Arial", 24); 
-    	lblEingabe.setFont(font);
-    	lblEingabe.setStyle("-fx-font-weight: bold;"); 
-    	lblAnzeige.setLayoutX(400);
-    	lblAnzeige.setLayoutY(40);
-      	lblAnzeige.setFont(font);
-       	lblAnzeige.setStyle("-fx-font-weight: bold;"); 
-       	lblName.setLayoutX(20);
-    	lblName.setLayoutY(90);
-    	lblGeoeffnetVon.setLayoutX(20);
-    	lblGeoeffnetVon.setLayoutY(130);
-    	lblGeoeffnetBis.setLayoutX(20);
-    	lblGeoeffnetBis.setLayoutY(170);
-    	lblStrasseHNr.setLayoutX(20);
-    	lblStrasseHNr.setLayoutY(210);
-    	lblDienstleistungen.setLayoutX(20);
-    	lblDienstleistungen.setLayoutY(250);    	
-       	pane.getChildren().addAll(lblEingabe, lblAnzeige, 
-       		lblName, lblGeoeffnetVon, lblGeoeffnetBis,
-       		lblStrasseHNr, lblDienstleistungen);
-    
-    	// Textfelder
-     	name.setLayoutX(170);
-    	name.setLayoutY(90);
-    	name.setPrefWidth(200);
-    	ort.setLayoutX(170);
-    	ort.setLayoutY(130);
-    	ort.setPrefWidth(200);
-    	anzahlEhemaligerMitglieder.setLayoutX(170);
-    	anzahlEhemaligerMitglieder.setLayoutY(170);
-    	anzahlEhemaligerMitglieder.setPrefWidth(200);
-      	sportarten.setLayoutX(170);
-    	sportarten.setLayoutY(210);
-    	sportarten.setPrefWidth(200);
-    	anzahlMitglieder.setLayoutX(170);
-    	anzahlMitglieder.setLayoutY(250);
-    	anzahlMitglieder.setPrefWidth(200);
-      	pane.getChildren().addAll( 
-     		name, ort, anzahlEhemaligerMitglieder,
-     		sportarten, anzahlMitglieder);
-     	
-        // Textbereich	
-        txtAnzeige.setEditable(false);
-     	txtAnzeige.setLayoutX(400);
-    	txtAnzeige.setLayoutY(90);
-     	txtAnzeige.setPrefWidth(270);
-    	txtAnzeige.setPrefHeight(185);
-       	pane.getChildren().add(txtAnzeige); 
-       	
-        // Buttons
-        btnEingabe.setLayoutX(20);
-        btnEingabe.setLayoutY(290);
-        btnAnzeige.setLayoutX(400);
-        btnAnzeige.setLayoutY(290);
-        pane.getChildren().addAll(btnEingabe, btnAnzeige); 
-        
- 		// Menue
-  	    this.mnbrMenuLeiste.getMenus().add(mnDatei);
-  	    this.mnDatei.getItems().add(mnItmCsvImport);
-  	    this.mnDatei.getItems().add(mnItmTxtImport);
-  	    this.mnDatei.getItems().add(new SeparatorMenuItem());
-  	    this.mnDatei.getItems().add(mnItmCsvExport);
- 	    pane.getChildren().add(mnbrMenuLeiste);
- 	    
- 	  
- 	   
-   }
+	 private void initKomponenten(){
+	       	// Labels
+	    	lblEingabe.setLayoutX(20);
+	    	lblEingabe.setLayoutY(40);
+	    	Font font = new Font("Arial", 24); 
+	    	lblEingabe.setFont(font);
+	    	lblEingabe.setStyle("-fx-font-weight: bold;"); 
+	    	lblAnzeige.setLayoutX(400);
+	    	lblAnzeige.setLayoutY(40);
+	      	lblAnzeige.setFont(font);
+	       	lblAnzeige.setStyle("-fx-font-weight: bold;"); 
+	       	lblName.setLayoutX(20);
+	    	lblName.setLayoutY(90);
+	    	lblOrt.setLayoutX(20);
+	    	lblOrt.setLayoutY(130);
+	    	lblEhemalige.setLayoutX(20);
+	    	lblEhemalige.setLayoutY(170);
+	    	lblAnzahlMitglieder.setLayoutX(20);
+	    	lblAnzahlMitglieder.setLayoutY(210);
+	    	lblSportarten.setLayoutX(20);
+	    	lblSportarten.setLayoutY(250);    	
+	       	pane.getChildren().addAll(lblEingabe, lblAnzeige, 
+	       		lblName, lblOrt, lblEhemalige,
+	       		lblAnzahlMitglieder, lblSportarten);
+	    
+	    	// Textfelder
+	     	name.setLayoutX(170);
+	    	name.setLayoutY(90);
+	    	name.setPrefWidth(200);
+	    	
+	    	ort.setLayoutX(170);
+	    	ort.setLayoutY(130);
+	    	ort.setPrefWidth(200);
+	    	anzahlEhemaligerMitglieder.setLayoutX(170);
+	    	anzahlEhemaligerMitglieder.setLayoutY(170);
+	    	anzahlEhemaligerMitglieder.setPrefWidth(200);
+	      	anzahlMitglieder1.setLayoutX(170);
+	    	anzahlMitglieder1.setLayoutY(210);
+	    	anzahlMitglieder1.setPrefWidth(200);
+	    	sportArten1.setLayoutX(170);
+	    	sportArten1.setLayoutY(250);
+	    	sportArten1.setPrefWidth(200);
+	      	pane.getChildren().addAll( 
+	     		name, ort, anzahlEhemaligerMitglieder,
+	     		anzahlMitglieder1, sportArten1);
+	     	
+	        // Textbereich	
+	        txtAnzeige.setEditable(false);
+	     	txtAnzeige.setLayoutX(400);
+	    	txtAnzeige.setLayoutY(90);
+	     	txtAnzeige.setPrefWidth(270);
+	    	txtAnzeige.setPrefHeight(185);
+	       	pane.getChildren().add(txtAnzeige); 
+	       	
+	        // Buttons
+	        btnEingabe.setLayoutX(20);
+	        btnEingabe.setLayoutY(290);
+	        btnAnzeige.setLayoutX(400);
+	        btnAnzeige.setLayoutY(290);
+	        pane.getChildren().addAll(btnEingabe, btnAnzeige); 
+	        
+	 		// Menue
+	  	    this.mnbrMenuLeiste.getMenus().add(mnDatei);
+	  	    this.mnDatei.getItems().add(mnItmCsvImport);
+	  	    this.mnDatei.getItems().add(mnItmTxtImport);
+	  	    this.mnDatei.getItems().add(new SeparatorMenuItem());
+	  	    this.mnDatei.getItems().add(mnItmCsvExport);
+	 	    pane.getChildren().add(mnbrMenuLeiste);
+	   }
 	
-	private void initListener() {
-	    btnEingabe.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-            	Sportverein sportverein = new Sportverein(name.getText(), ort.getText(), anzahlEhemaligerMitglieder.getText(), anzahlMitglieder.getText(), sportarten.getText());
-            	this.sportModel.setSportverein(sportverein);
-            	//this.sportControl.nehmeBuergeramtauf();
-            	
-            }
-	    });
-	    btnAnzeige.setOnAction(new EventHandler<ActionEvent>() {
-	    	@Override
-	        public void handle(ActionEvent e) {
-	            zeigeBuergeraemterAn();
-	        } 
-   	    });
-	    mnItmCsvImport.setOnAction(new EventHandler<ActionEvent>() {
-	    	@Override
-	        public void handle(ActionEvent e) {
-	       	 	leseAusDatei("csv");
-	    	}
-	    });
-	    mnItmTxtImport.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override
-		    public void handle(ActionEvent e) {
-		     	leseAusDatei("txt");
-		    }
-    	});
-	    mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				schreibeBuergeraemterInCsvDatei();
-			}	
-	    });
-    }
+		//Anmerkung: wenn ich be ->this<-.sportControl.nehmeSportVereinAuf geht das nicht (weiß nicht warum)
+	   private void initListener() {
+		    btnEingabe.setOnAction(new EventHandler<ActionEvent>() {
+	            @Override
+	            public void handle(ActionEvent e) {
+	        	    sportControl.nehmeSportVereinAuf();
+	            }
+		    });
+		    btnAnzeige.setOnAction(new EventHandler<ActionEvent>() {
+		    	@Override
+		        public void handle(ActionEvent e) {
+		    		//methode unten gucken wegen info
+		            zeigeSportVereineAn();
+		        } 
+	   	    });
+		    mnItmCsvImport.setOnAction(new EventHandler<ActionEvent>() {
+		    	@Override
+		        public void handle(ActionEvent e) {
+		    		sportControl.leseAusDatei("csv");
+		    	}
+		    });
+		    mnItmTxtImport.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override
+			    public void handle(ActionEvent e) {
+			    	sportControl.leseAusDatei("txt");
+			    }
+	    	});
+		    mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e) {
+					sportControl.schreibeSportVereinInCsv();
+				}	
+		    });
+	    }
 	
+	   
+	   void nehmeSportVereinAuf() throws Exception{
+
+		   
+		   Sportverein sportVerein = new Sportverein(
+		   			name.getText(), 
+		  	        Float.parseFloat(anzahlEhemaligerMitglieder.getText()),
+		  	        Float.parseFloat(anzahlMitglieder1.getText()),
+		   		    ort.getText(),
+		   		    sportArten1.getText().split(";"));
+		   			
+		   
+		   			//Test um zu gucken ob die Attribute des Objekts auch richtig gesetzt werden
+		   			System.out.println("------------------------------------------------------------------");
+		   			System.out.println(sportVerein.getName());
+		   			System.out.println(sportVerein.getAnzahlEhemaligerMitglieder());
+		   			System.out.println(sportVerein.getAnzahlMitglieder());
+		   			System.out.println(sportVerein.getOrt());
+		   			
+		   			//Hier in dem Fall ist der Trenner einfach wie es ausgegeben wird. Weil in der Methode geht er durch das Array
+		   			//und gibt einen Einzeiligen-String zurück der nach dem Zeichen getrennt wird, welches man ihm übergibt.
+		 		    System.out.println("Sportarten: " + sportVerein.getSportArtenAlsString(' '));
+		   			System.out.println("------------------------------------------------------------------");
+
+
+		   			//Test ob Sportarten auch richtig getrennt werden
+		   			/*String[] sportart = sportVerein.getSportarten();
+		   			
+		   			for(String e : sportart) {
+		   				System.out.println(e);
+		   			}*/
+
+   		
+	    		//Das Sporvereinobjekt was neu erzeugt wird, muss dem Sportmodel übergeben werden!!!
+	    		//Andernfalls weiß es nicht, um welches Objekt es sich handelt
+	    		 //System.out.println("Eingabe knopf wird gedrückt und setSportVerein aufgerufen");
+	    	this.sportModel.setSportVerein(sportVerein);
+	    	zeigeInformationsfensterAn("Der Sportverein wurde aufgenommen!");
+	       	
+	       
+	    }   
+	   
+	   
+	//Im Model lassen, weil das Textfield hier "gesettet"/belegt wird und falls noch kein Sportverein aufgenommen wurde
+	//die methode zeigeInformationsfensterAn direkt hier in der View aufgerufen wird. Deswegen hier gelassen.   
+	private void zeigeSportVereineAn(){
+		//siehe BuergeraemterAnwendersystem für info
+    	if(this.sportModel.sportVerein != null){
+    		txtAnzeige.setText(
+    			sportModel.sportVerein.gibSportVereinZurueck(' '));
+    		
+    	}
+    	else{
+    		zeigeInformationsfensterAn("Bisher wurde kein Sportverein aufgenommen!");
+    	}
+    }   
+
 	
-	
-	
-	
-	
-	private void zeigeInformationsfensterAn(String meldung){
+	void zeigeInformationsfensterAn(String meldung){
     	new MeldungsfensterAnzeiger(AlertType.INFORMATION,
     		"Information", meldung).zeigeMeldungsfensterAn();
     }	

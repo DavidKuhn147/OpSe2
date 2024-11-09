@@ -1,3 +1,11 @@
+
+
+//Das ist die Vorgabe gewesen, aus der ich das MVC für SportVerein machen sollte
+//Funktioniert nicht richtig weil ich das Objekt von Buergeraemter in Sportvereinen umgewandelt habe
+//und auch in dieser Klasse das geändert habe.
+
+
+
 package gui;
    
 import java.io.BufferedReader;
@@ -42,9 +50,11 @@ public class BuergeraemterAnwendersystem {
     private MenuItem mnItmCsvExport 		= new MenuItem("csv-Export");    
     //-------Ende Attribute der grafischen Oberflaeche-------
     
-    // speichert temporaer ein Objekt vom Typ Buergeramt
+    // speichert temporaer ein Objekt vom Typ Buergeramt (habe ich hier schon im Praktikum geändert, hätte ich lieber lassen sollen)
+    //In der View ganz oben wo die ganzen Labels, Textfelds usw. erstellt werden
     private Sportverein sportVerein;
     
+    //* View (Construktor)
     public BuergeraemterAnwendersystem(Stage primaryStage){
     	Scene scene = new Scene(this.pane, 700, 340);
     	primaryStage.setScene(scene);
@@ -54,6 +64,7 @@ public class BuergeraemterAnwendersystem {
 		this.initListener();
     }
     
+    //* View
     private void initKomponenten(){
        	// Labels
     	lblEingabe.setLayoutX(20);
@@ -123,6 +134,7 @@ public class BuergeraemterAnwendersystem {
  	    pane.getChildren().add(mnbrMenuLeiste);
    }
    
+   //* View 
    private void initListener() {
 	    btnEingabe.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -156,8 +168,10 @@ public class BuergeraemterAnwendersystem {
 	    });
     }
     
+   //* View + Control (Fehler-Handling) ()nehmeSportVereinAuf(...)
     private void nehmeBuergeramtAuf(){
     	try{
+        	//hier heißt es schon Sportverein, weil ich im Praktikum im BuergeramterAnwendersystem das schon umbenannt habe
     		this.sportVerein = new Sportverein(
     			name.getText(), 
    	            Float.parseFloat(ort.getText()),
@@ -171,20 +185,23 @@ public class BuergeraemterAnwendersystem {
      	}
     }
    
+    //* View 
     private void zeigeBuergeraemterAn(){
+    	//hier heißt es schon Sportverein, weil ich im Praktikum im BuergeramterAnwendersystem das schon umbenannt habe
     	if(this.sportVerein != null){
     		txtAnzeige.setText(
-    			this.sportVerein.gibBuergeramtZurueck(' '));
+    			this.sportVerein.gibSportVereinZurueck(' '));
     	}
     	else{
     		zeigeInformationsfensterAn("Bisher wurde kein Bürgeramt aufgenommen!");
     	}
     }    
-		  
+	
+    //* Modell + Control (Fehler-Handling)
     private void leseAusDatei(String typ){
     	try {
       		if("csv".equals(typ)){
-      			BufferedReader ein = new BufferedReader(new FileReader("Buergeraemter.csv"));
+      			BufferedReader ein = new BufferedReader(new FileReader("BuergeraemterAusgabe.csv"));
       			String[] zeile = ein.readLine().split(";");
       			this.sportVerein = new Sportverein(zeile[0], 
       				Float.parseFloat(zeile[1]), 
@@ -208,12 +225,14 @@ public class BuergeraemterAnwendersystem {
 				"Unbekannter Fehler beim Lesen!");
 		}
 	}
-		
+	
+    
+    //* Modell + Control (Fehler-Handling), noch umbennenen in schreibeSportVereinInCsvDatei
 	private void schreibeBuergeraemterInCsvDatei() {
 		try {
 			BufferedWriter aus 
 				= new BufferedWriter(new FileWriter("BuergeraemterAusgabe.csv", true));
-			aus.write(sportVerein.gibBuergeramtZurueck(';'));
+			aus.write(sportVerein.gibSportVereinZurueck(';'));
 			aus.close();
    			zeigeInformationsfensterAn(
 	   			"Die Bürgerämter wurden gespeichert!");
@@ -227,7 +246,8 @@ public class BuergeraemterAnwendersystem {
 				"Unbekannter Fehler beim Speichern!");
 		}
 	}
-
+	
+	//* View
     private void zeigeInformationsfensterAn(String meldung){
     	new MeldungsfensterAnzeiger(AlertType.INFORMATION,
     		"Information", meldung).zeigeMeldungsfensterAn();

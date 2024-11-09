@@ -1,11 +1,19 @@
 package business;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 public class SportControl {
 	
-	SportView sportView;
-	SportModel sportModel;
+	private SportView sportView;
+	private SportModel sportModel;
 	
 	public SportControl(Stage primaryStage) {
 		this.sportModel = new SportModel();
@@ -13,22 +21,61 @@ public class SportControl {
 		
 	}
 	
-	  private void nehmeBuergeramtAuf(){
-	    	Sportverein sportverein = this.sportModel.getSportVerein();
-		    
-	    	thi
-		    
-		    
-	    }
-	   
-	    private void zeigeBuergeraemterAn(){
-	    	if(this.sportVerein != null){
-	    		txtAnzeige.setText(
-	    			this.sportVerein.gibBuergeramtZurueck(' '));
-	    	}
-	    	else{
-	    		zeigeInformationsfensterAn("Bisher wurde kein Bürgeramt aufgenommen!");
-	    	}
-	    } 
+	
+	void nehmeSportVereinAuf(){
+	    try {
+			this.sportView.nehmeSportVereinAuf();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+	       	this.sportView.zeigeFehlermeldungsfensterAn(e.getMessage());
+		}
+	}
+	
+	
+	void leseAusDatei(String typ){
+		try {
+      		if("csv".equals(typ)){
+      			this.sportModel.leseAusDatei(typ);
+      			
+      			this.sportView.zeigeInformationsfensterAn(
+	  	   			"Die Sportvereine wurden gelesen!");
+      			
+      		} else {
+      			this.sportView.zeigeInformationsfensterAn(
+		   				"Noch nicht implementiert!");
+		   	}
+		}
+		catch(IOException exc){
+			this.sportView.zeigeFehlermeldungsfensterAn(
+				"IOException beim Lesen!");
+		}
+		catch(Exception exc){
+			this.sportView.zeigeFehlermeldungsfensterAn(
+				"Unbekannter Fehler beim Lesen!");
+		}
+	}
+	
+	
+	void schreibeSportVereinInCsv() {
+		try {
+			this.sportModel.schreibeSportVereinInCsv();
+			
+
+   			this.sportView.zeigeInformationsfensterAn(
+	   			"Die Sportvereine wurden gespeichert!");
+   			
+		}	
+		catch(IOException exc){
+			this.sportView.zeigeFehlermeldungsfensterAn(
+				"IOException beim Speichern!");
+		}
+		catch(Exception exc){
+			this.sportView.zeigeFehlermeldungsfensterAn(
+				"Unbekannter Fehler beim Speichern!");
+		}
+	}
+
+
+	
 
 }

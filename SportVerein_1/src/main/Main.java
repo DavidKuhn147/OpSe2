@@ -9,6 +9,7 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
+		//Aufruf der Vorgabe, um Buerger aufzunehmen/speichern und sie in eine txt/csv Datei zu schreiben
 		//new BuergeraemterAnwendersystem(primaryStage);
 		new SportControl(primaryStage);
 	}	

@@ -1,3 +1,7 @@
+
+//Diese Klasse wo ich meine Objekte für Sportvereine speichere, habe ich im Praktikum schon umbenenannt.
+//Vorher war das die Klasse BuergerAemter (glaube ich)
+
 package business;
 
 public class Sportverein {
@@ -14,8 +18,16 @@ public class Sportverein {
 
    
 	
-	public Sportverein(String name, float anzahlEhemaligerMitglieder, float anzahlMitglieder, String ort,
-			String[] sportarten) {
+	/*public Sportverein(String name, float anzahlEhemaligerMitglieder, float anzahlMitglieder, String ort, String[] sportarten) {
+		super();
+		this.name = name;
+		this.anzahlEhemaligerMitglieder = anzahlEhemaligerMitglieder;
+		this.anzahlMitglieder = anzahlMitglieder;
+		this.ort = ort;
+		this.sportarten = sportarten;
+	}*/
+	
+	public Sportverein(String name, float anzahlEhemaligerMitglieder, float anzahlMitglieder, String ort, String[] sportarten) {
 		super();
 		this.name = name;
 		this.anzahlEhemaligerMitglieder = anzahlEhemaligerMitglieder;
@@ -23,7 +35,6 @@ public class Sportverein {
 		this.ort = ort;
 		this.sportarten = sportarten;
 	}
-	
 	
 
 	public String getName() {
@@ -86,7 +97,8 @@ public class Sportverein {
 
 
 
-	public String getSportartenalsString(char trenner) {
+	public String getSportArtenAlsString(char trenner) {
+		//System.out.println("getSportArtenAlsString");
 		String ergebnis = "";
 		int i = 0;
 		for(i = 0; i < this.getSportarten().length - 1; i++) {
@@ -95,12 +107,13 @@ public class Sportverein {
 		return ergebnis	+ this.getSportarten()[i];
 	}
 	
-	public String gibBuergeramtZurueck(char trenner){
+	//Hier ein Fehler der Datei deswegn hat das die ganze Zeit nicht funktioniert siehe(innerhalb der Methode das was auskommentiert ist) soll das so sein????
+	public String gibSportVereinZurueck(char trenner){
   		return this.getName() + trenner 
   			+ this.getAnzahlEhemaligerMitglieder() + trenner
   		    + this.getAnzahlMitglieder() + trenner
-  		    + this.getOrt() + trenner + "\n"
-  		    + this.getSportartenalsString(trenner) + "\n";
+  		    + this.getOrt() + trenner + /*"\n"
+  		    +*/ this.getSportArtenAlsString(trenner) + "\n";
   	}
 }
 
