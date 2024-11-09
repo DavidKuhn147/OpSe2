@@ -1,5 +1,6 @@
 //Herr Jonker vielleicht nochmal fragen, warum ich die Reihenfolge von den TextFields nicht ändern konnte
 //Hab es irgendwie relativ "normal" hingekriegt, würde es aber dennoch gerne wissen.
+//Generell auch auf andere Fragen ACHTEN!!!!
 
 package business;
 
@@ -40,11 +41,11 @@ public class SportView {
     private Label lblAnzahlMitglieder   	= new Label("Anzahl Mitglieder: ");
     private Label lblSportarten  			= new Label("Sportarten: ");
     
-    private TextField name 	 			= new TextField();
-    private TextField ort		= new TextField();
+    private TextField name 	 				= new TextField();
+    private TextField ort					= new TextField();
     private TextField anzahlEhemaligerMitglieder = new TextField();
     private TextField anzahlMitglieder1			= new TextField();
-    private TextField sportArten1	= new TextField();
+    private TextField sportArten1			= new TextField();
 
     private TextArea txtAnzeige  			= new TextArea();
     private Button btnEingabe 		 		= new Button("Eingabe");
@@ -181,18 +182,23 @@ public class SportView {
 	
 	   
 	   void nehmeSportVereinAuf() throws Exception{
-
+		   //Wenn man im Sportarten Feld es mit einem _ trennt und wieder einliest wird das Array richtig belegt
+		   //Aber beim eingeben wird es so angezeigt, als wäre es ein Wort.
+		   //Generell komisch muss man fragen
 		   
 		   Sportverein sportVerein = new Sportverein(
 		   			name.getText(), 
 		  	        Float.parseFloat(anzahlEhemaligerMitglieder.getText()),
 		  	        Float.parseFloat(anzahlMitglieder1.getText()),
 		   		    ort.getText(),
+		   		    
+		   		    
+		   		    //Generell mit dem Splitten ist komisch zwischen ";" und "_" muss man gucken kp 
 		   		    sportArten1.getText().split(";"));
 		   			
 		   
 		   			//Test um zu gucken ob die Attribute des Objekts auch richtig gesetzt werden
-		   			System.out.println("------------------------------------------------------------------");
+		   			/*System.out.println("------------------------------------------------------------------");
 		   			System.out.println(sportVerein.getName());
 		   			System.out.println(sportVerein.getAnzahlEhemaligerMitglieder());
 		   			System.out.println(sportVerein.getAnzahlMitglieder());
@@ -201,15 +207,15 @@ public class SportView {
 		   			//Hier in dem Fall ist der Trenner einfach wie es ausgegeben wird. Weil in der Methode geht er durch das Array
 		   			//und gibt einen Einzeiligen-String zurück der nach dem Zeichen getrennt wird, welches man ihm übergibt.
 		 		    System.out.println("Sportarten: " + sportVerein.getSportArtenAlsString(' '));
-		   			System.out.println("------------------------------------------------------------------");
+		   			System.out.println("------------------------------------------------------------------");*/
 
 
 		   			//Test ob Sportarten auch richtig getrennt werden
-		   			/*String[] sportart = sportVerein.getSportarten();
+		   			String[] sportart = sportVerein.getSportarten();
 		   			
 		   			for(String e : sportart) {
 		   				System.out.println(e);
-		   			}*/
+		   			}
 
    		
 	    		//Das Sporvereinobjekt was neu erzeugt wird, muss dem Sportmodel übergeben werden!!!
@@ -229,6 +235,13 @@ public class SportView {
     	if(this.sportModel.sportVerein != null){
     		txtAnzeige.setText(
     			sportModel.sportVerein.gibSportVereinZurueck(' '));
+    		
+    		//Test ob Sportarten auch richtig getrennt werden
+   			String[] sportart = sportModel.sportVerein.getSportarten();
+   			
+   			for(String e : sportart) {
+   				System.out.println(e);
+   			}
     		
     	}
     	else{

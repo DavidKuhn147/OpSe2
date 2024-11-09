@@ -1,8 +1,11 @@
-
+//ACHTUNG: TextField und Attribut Reihenfolge ist hier nicht richtig, weil ich das im Praktikum durcheinander gemacht habe
 
 //Das ist die Vorgabe gewesen, aus der ich das MVC für SportVerein machen sollte
+
 //Funktioniert nicht richtig weil ich das Objekt von Buergeraemter in Sportvereinen umgewandelt habe
 //und auch in dieser Klasse das geändert habe.
+
+//
 
 
 
@@ -169,6 +172,7 @@ public class BuergeraemterAnwendersystem {
     }
     
    //* View + Control (Fehler-Handling) ()nehmeSportVereinAuf(...)
+   //Die Attribut Reihenfolge ist hier falsch, weil ich das im Praktikum nicht richtig gemacht habe
     private void nehmeBuergeramtAuf(){
     	try{
         	//hier heißt es schon Sportverein, weil ich im Praktikum im BuergeramterAnwendersystem das schon umbenannt habe
