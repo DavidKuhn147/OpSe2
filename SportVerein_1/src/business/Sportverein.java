@@ -108,6 +108,7 @@ public class Sportverein {
 	}
 	
 	//Hier ein Fehler der Datei deswegn hat das die ganze Zeit nicht funktioniert siehe(innerhalb der Methode das was auskommentiert ist) soll das so sein????
+	//Ab getOrt wird dann sportArten in die nächste Zeile geschrieben, warum auch immer.
 	public String gibSportVereinZurueck(char trenner){
   		return this.getName() + trenner 
   			+ this.getAnzahlEhemaligerMitglieder() + trenner

@@ -206,7 +206,7 @@ public class BuergeraemterAnwendersystem {
     	try {
       		if("csv".equals(typ)){
       			BufferedReader ein = new BufferedReader(new FileReader("BuergeraemterAusgabe.csv"));
-      			String[] zeile = ein.readLine().split(";");
+      			String[] zeile = ein.readLine().split(";");	
       			this.sportVerein = new Sportverein(zeile[0], 
       				Float.parseFloat(zeile[1]), 
       				Float.parseFloat(zeile[2]), 

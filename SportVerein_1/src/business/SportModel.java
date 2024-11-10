@@ -14,11 +14,43 @@ public class SportModel {
 	}
 	
 	
+	//Methode um z.B. mehrere Einträge aus einer CSV Datei zu lesen
+	//Dann müsste man aber hier im SportModel ein Sportverein[] erzeugen und diese mit Werte belegen.
+	//Diese müsste man dann auch in alle anderen Klassen ändern wie z.B. bei zeigeSportVereineAn und nehmeSportVerein auf
+		
+	/*void leseAusDatei(String typ) throws Exception {
+	    BufferedReader ein = new BufferedReader(new FileReader("Sportverein.csv"));
+	    
+	    String line;
+	    int index = 0;
+	    
+	    while ((line = ein.readLine()) != null) {
+	        String[] zeile = line.split(";");
+	        
+	        this.sportVerein = new Sportverein(
+	            zeile[0],
+	            Float.parseFloat(zeile[1]),
+	            Float.parseFloat(zeile[2]),
+	            zeile[3],
+	            zeile[4].split("_")
+	        );
+	        
+	        index++;
+	        
+	        System.out.println(index + ". Sportvereine: " + this.sportVerein.gibSportVereinZurueck(' '));
+	    }
+	    
+	    ein.close();
+	}*/
 	
+	
+	//Allgemeine Info: Eine Exception kann über mehrere Klassen geleitet werden.
+	//Wird eine Exception nigendswo "aufgefangen" mit try-catch ensteht eine RuntimeException
 	void leseAusDatei(String typ) throws Exception{
     
       	BufferedReader ein = new BufferedReader(new FileReader("Sportverein.csv"));
       	String[] zeile = ein.readLine().split(";");
+   
       		this.sportVerein = new Sportverein(zeile[0], 
       			Float.parseFloat(zeile[1]), 
       			Float.parseFloat(zeile[2]), 

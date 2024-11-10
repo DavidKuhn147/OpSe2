@@ -194,6 +194,9 @@ public class SportView {
 		   		    
 		   		    
 		   		    //Generell mit dem Splitten ist komisch zwischen ";" und "_" muss man gucken kp 
+		   		    //Ich glaube, weil es sich um eine Excel handelt, splitet er den "Tabelleneintrag"
+		   		    //Man soll es mit unterstrichen Eingeben, damit es richtig gelesen werden kann
+		   		    //Eventuell muss man beim nächsten Praktikum dafür sorgen, das die ganze Excel angezeigt wird?
 		   		    sportArten1.getText().split(";"));
 		   			
 		   
@@ -236,7 +239,8 @@ public class SportView {
     		txtAnzeige.setText(
     			sportModel.sportVerein.gibSportVereinZurueck(' '));
     		
-    		//Test ob Sportarten auch richtig getrennt werden
+    		//Test ob Sportarten auch richtig getrennt werden wird mit _ getrennt + in der Klasse Sportverein_Methode: gibSportVereinZurueck
+    		//Habe ich das zurückgeben des Strings geändert (siehe selbst)
    			String[] sportart = sportModel.sportVerein.getSportarten();
    			
    			for(String e : sportart) {
