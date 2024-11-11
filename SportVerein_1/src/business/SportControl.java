@@ -35,14 +35,17 @@ public class SportControl {
 	void leseAusDatei(String typ){
 		try {
       		if("csv".equals(typ)){
-      			this.sportModel.leseAusDatei(typ);
+      			this.sportModel.leseAusDateiCSV();
       			
       			this.sportView.zeigeInformationsfensterAn(
 	  	   			"Die Sportvereine wurden gelesen!");
       			
       		} else {
-      			this.sportView.zeigeInformationsfensterAn(
-		   				"Noch nicht implementiert!");
+      			
+      			this.sportModel.leseAusDateiTXT();
+      			
+      			/*this.sportView.zeigeInformationsfensterAn(
+		   				"Noch nicht implementiert!");*/
 		   	}
 		}
 		catch(IOException exc){

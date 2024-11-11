@@ -5,6 +5,11 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+import reader.ConcreteCSVReaderCreator;
+import reader.ConcreteTXTReaderCreator;
+import reader.ReaderCreator;
+import reader.ReaderProduct;
+
 
 public class SportModel {
 	
@@ -44,9 +49,12 @@ public class SportModel {
 	}*/
 	
 	
+	
+	//FABRIKMETHODE: VORHERIGE KLASSE
+
 	//Allgemeine Info: Eine Exception kann über mehrere Klassen geleitet werden.
 	//Wird eine Exception nigendswo "aufgefangen" mit try-catch ensteht eine RuntimeException
-	void leseAusDatei(String typ) throws Exception{
+	/*void leseAusDatei(String typ) throws Exception{
     
       	BufferedReader ein = new BufferedReader(new FileReader("Sportverein.csv"));
       	String[] zeile = ein.readLine().split(";");
@@ -56,8 +64,45 @@ public class SportModel {
       			Float.parseFloat(zeile[2]), 
       			zeile[3], zeile[4].split("_"));
       	ein.close();
-	}
+	}*/
 		
+	
+	void leseAusDateiCSV() throws Exception{
+		
+		ReaderCreator readerCreator = new ConcreteCSVReaderCreator();
+		//gibt ConcreteCSVReaderProduct zurueck
+		ReaderProduct reader = readerCreator.factoryMethod();
+		
+		
+	    
+      	String[] zeile = reader.leseAusDatei();
+   
+      		this.sportVerein = new Sportverein(zeile[0], 
+      			Float.parseFloat(zeile[1]), 
+      			Float.parseFloat(zeile[2]), 
+      			zeile[3], zeile[4].split("_"));
+      		
+      		reader.schliesseDatei();
+	}
+	
+	void leseAusDateiTXT() throws Exception{
+		
+		ReaderCreator readerTXTCreator = new ConcreteTXTReaderCreator();
+		ReaderProduct readettxt = readerTXTCreator.factoryMethod();
+		
+		String[] zeile = readettxt.leseAusDatei();
+		   
+  		this.sportVerein = new Sportverein(zeile[0], 
+  			Float.parseFloat(zeile[1]), 
+  			Float.parseFloat(zeile[2]), 
+  			zeile[3], zeile[4].split("_"));
+  		
+  		readettxt.schliesseDatei();
+		
+	}
+	
+	
+	
 	//hier noch mit Control für die Fehlerbehebung verknüpfen + in Buergeramt-Klasse schreiben, dass man das im Model und Control gemacht hat
 	//Der Kommentar war eine Merkhilfe für mich, hab ich umgesetzt genause wie für die anderen schreibe/lese Methoden
 	void schreibeSportVereinInCsv() throws Exception{
