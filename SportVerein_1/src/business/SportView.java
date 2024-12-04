@@ -2,6 +2,12 @@
 //Hab es irgendwie relativ "normal" hingekriegt, würde es aber dennoch gerne wissen.
 //Generell auch auf andere Fragen ACHTEN!!!!
 
+//Prüfen ob Observer eine instanz von observable ist (nur bei schon java implementierten)
+    /*@Override
+    public void update(Observable o, Object arg){
+
+    	if(o instanceof BaelleModel) {	*/
+
 package business;
 
 import javafx.event.ActionEvent;
@@ -19,6 +25,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import ownUtil.MeldungsfensterAnzeiger;
 
 public class SportView {
@@ -72,6 +79,8 @@ public class SportView {
     	
 		this.initListener();
 		
+		//Fall beim schließen z.B iwas gemacht werden soll wie z.B. den Observer abmelden
+		//primaryStage.setOnCloseRequest(event -> handleWindowClosing(event, primaryStage));
 		
 	}
 	
@@ -262,6 +271,18 @@ public class SportView {
     void zeigeFehlermeldungsfensterAn(String meldung){
        	new MeldungsfensterAnzeiger(AlertType.ERROR,
         	"Fehler", meldung).zeigeMeldungsfensterAn();
+    }
+    
+    
+    //Fenster schließen und observer abmelden damit das Informationsfenster nicht angezeigt wird
+    private void handleWindowClosing(WindowEvent event, Stage stage) {
+    	//verhindert das automatische schließen des fensters
+    	event.consume();
+    	
+    	//this.baelleModel.deleteObserver(this);
+    	System.out.println("Fenster wird geschlossen!!!");
+    	
+    	stage.close();
     }
 
 }
