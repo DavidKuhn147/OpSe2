@@ -6,6 +6,6 @@ public abstract class ReaderProduct {
 	
 	public abstract String[] leseAusDatei() throws IOException;
 	
-	//Ist mit schließe Datei gemeint die CSV Datei oder der Reader?
+	//Ist mit schlieï¿½e Datei ist das schlieÃŸen des bufferedReader gemeint
 	public abstract void schliesseDatei() throws IOException;
 }
