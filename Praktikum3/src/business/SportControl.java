@@ -35,12 +35,13 @@ public class SportControl implements Observer{
 	
 	
 	void leseAusDatei(String typ){
+		
+		
 		try {
       		if("csv".equals(typ)){
       			this.sportModel.leseAusDateiCSV();
-      			
-      			this.sportView.zeigeInformationsfensterAn(
-	  	   			"Die Sportvereine wurden gelesen!");
+      			/*this.sportView.zeigeInformationsfensterAn(
+	  	   			"Die Sportvereine wurden gelesen!");*/
       			
       		} else {
       			
@@ -58,6 +59,9 @@ public class SportControl implements Observer{
 			this.sportView.zeigeFehlermeldungsfensterAn(
 				"Unbekannter Fehler beim Lesen!");
 		}
+		
+
+	
 	}
 	
 	

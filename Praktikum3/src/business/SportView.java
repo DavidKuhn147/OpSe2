@@ -10,6 +10,8 @@
 
 package business;
 
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -169,12 +171,16 @@ public class SportView {
 		            //zeigeSportVereineAn();
 		        } 
 	   	    });
-		    mnItmCsvImport.setOnAction(new EventHandler<ActionEvent>() {
+		    /*mnItmCsvImport.setOnAction(new EventHandler<ActionEvent>() {
 		    	@Override
 		        public void handle(ActionEvent e) {
 		    		sportControl.leseAusDatei("csv");
 		    	}
-		    });
+		    });*/
+		    
+		    //Lambda Expression
+		    mnItmCsvImport.setOnAction(e -> sportControl.leseAusDatei("csv"));
+		    
 		    mnItmTxtImport.setOnAction(new EventHandler<ActionEvent>() {
 			    @Override
 			    public void handle(ActionEvent e) {
@@ -191,9 +197,7 @@ public class SportView {
 	
 	   
 	   void nehmeSportVereinAuf() throws Exception{
-		   //Wenn man im Sportarten Feld es mit einem _ trennt und wieder einliest wird das Array richtig belegt
-		   //Aber beim eingeben wird es so angezeigt, als wäre es ein Wort.
-		   //Generell komisch muss man fragen
+
 		   
 		   Sportverein sportVerein = new Sportverein(
 		   			name.getText(), 
@@ -201,39 +205,21 @@ public class SportView {
 		  	        Float.parseFloat(anzahlMitglieder1.getText()),
 		   		    ort.getText(),
 		   		    
-		   		    
-		   		    //Generell mit dem Splitten ist komisch zwischen ";" und "_" muss man gucken kp 
-		   		    //Ich glaube, weil es sich um eine Excel handelt, splitet er den "Tabelleneintrag"
-		   		    //Man soll es mit unterstrichen Eingeben, damit es richtig gelesen werden kann
-		   		    //Eventuell muss man beim nächsten Praktikum dafür sorgen, das die ganze Excel angezeigt wird?
+
 		   		    sportArten1.getText().split(";"));
 		   			
-		   
-		   			//Test um zu gucken ob die Attribute des Objekts auch richtig gesetzt werden
-		   			/*System.out.println("------------------------------------------------------------------");
-		   			System.out.println(sportVerein.getName());
-		   			System.out.println(sportVerein.getAnzahlEhemaligerMitglieder());
-		   			System.out.println(sportVerein.getAnzahlMitglieder());
-		   			System.out.println(sportVerein.getOrt());
-		   			
-		   			//Hier in dem Fall ist der Trenner einfach wie es ausgegeben wird. Weil in der Methode geht er durch das Array
-		   			//und gibt einen Einzeiligen-String zurück der nach dem Zeichen getrennt wird, welches man ihm übergibt.
-		 		    System.out.println("Sportarten: " + sportVerein.getSportArtenAlsString(' '));
-		   			System.out.println("------------------------------------------------------------------");*/
+
 
 
 		   			//Test ob Sportarten auch richtig getrennt werden
 		   			String[] sportart = sportVerein.getSportarten();
+		   			System.out.println("Test Sportvereintrennung");
 		   			
 		   			for(String e : sportart) {
 		   				System.out.println(e);
 		   			}
 
-   		
-	    		//Das Sporvereinobjekt was neu erzeugt wird, muss dem Sportmodel übergeben werden!!!
-	    		//Andernfalls weiß es nicht, um welches Objekt es sich handelt
-	    		 //System.out.println("Eingabe knopf wird gedrückt und setSportVerein aufgerufen");
-	    	this.sportModel.setSportVerein(sportVerein);
+	    	this.sportModel.addSportverein(sportVerein);
 	    	zeigeInformationsfensterAn("Der Sportverein wurde aufgenommen!");
 	    	this.sportModel.notifyObservers();
 	       	
@@ -248,19 +234,27 @@ public class SportView {
 	   void zeigeSportVereineAn() {
 	   
 		//siehe BuergeraemterAnwendersystem für info
-    	if(this.sportModel.sportVerein != null){
-    		txtAnzeige.setText(
-    			sportModel.sportVerein.gibSportVereinZurueck(' '));
-    		
-    		//Test ob Sportarten auch richtig getrennt werden wird mit _ getrennt + in der Klasse Sportverein_Methode: gibSportVereinZurueck
-    		//Habe ich das zurückgeben des Strings geändert (siehe selbst)
-   			String[] sportart = sportModel.sportVerein.getSportarten();
-   			
-   			for(String e : sportart) {
-   				System.out.println(e);
-   			}
-    		
-    	}
+		   if(this.sportModel.sportVerein != null){
+	    		/*txtAnzeige.setText(
+	    			sportModel.sportVerein.gibSportVereinZurueck(' '));*/
+	    		
+	    		String text = "";
+	    		
+	    		ArrayList<Sportverein> sportvereine = this.sportModel.getSportVereine();
+	    		
+	    		for(Sportverein s : sportvereine) {
+	    				 
+	    			//txtAnzeige.setText(
+	    	    		//	sportvereine.get(i).gibSportVereinZurueck(' '));
+	    			
+	    			text = text + s.gibSportVereinZurueck(' ');
+	    			
+	    		}
+	    		
+	    		txtAnzeige.setText(text);
+	    		
+	    		
+	    	}
     	else{
     		zeigeInformationsfensterAn("Bisher wurde kein Sportverein aufgenommen!");
     	}

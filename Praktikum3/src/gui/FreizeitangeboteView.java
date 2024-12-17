@@ -1,6 +1,9 @@
 package gui;
 
+import java.util.ArrayList;
+
 import business.SportModel;
+import business.Sportverein;
 import javafx.event.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -70,11 +73,31 @@ private SportModel sportvereineModel;
     }
    
     void zeigeSportvereineAn(){
-    		if(sportvereineModel.getSportVerein() != null){
-    			txtAnzeigeSportvereine.setText(
-    				sportvereineModel.getSportVerein()
- 				.gibSportVereinZurueck(' '));
-    		}
+
+    		
+    		//siehe BuergeraemterAnwendersystem für info
+ 		   if((this.sportvereineModel.getVerein()) != null){
+ 	    		/*txtAnzeige.setText(
+ 	    			sportModel.sportVerein.gibSportVereinZurueck(' '));*/
+ 	    		
+ 	    		String text = "";
+ 	    		
+ 	    		ArrayList<Sportverein> sportvereine = this.sportvereineModel.getSportVereine();
+ 	    		
+ 	    		for(Sportverein s : sportvereine) {
+ 	    			
+ 	    			System.out.println(s.gibSportVereinZurueck(' '));
+ 	 
+ 	    			//txtAnzeige.setText(
+ 	    	    		//	sportvereine.get(i).gibSportVereinZurueck(' '));
+ 	    			
+ 	    			text = text + s.gibSportVereinZurueck(' ');
+ 	    			
+ 	    		}
+ 	    		
+ 	    		txtAnzeigeSportvereine.setText(text);
+ 		   }
+    		
     		else{
     			zeigeInformationsfensterAn(
  				"Bisher wurde kein Sportverein aufgenommen!");
